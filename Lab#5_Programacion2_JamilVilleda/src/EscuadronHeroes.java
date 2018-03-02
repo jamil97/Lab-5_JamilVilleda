@@ -10,25 +10,24 @@ import java.util.ArrayList;
  *
  * @author Jamil
  */
-public class Escuadron {
+public class EscuadronHeroes {
 
     private String nombre;
     private String localidadbase;
     private String lema;
     private String lider;
-    private String tipoescuadron;
     private ArrayList<Superheroes> heroes = new ArrayList();
-    private ArrayList<Villanos> villanos = new ArrayList();
+    private boolean tipo = false;
+   
 
-    public Escuadron() {
+    public EscuadronHeroes() {
     }
 
-    public Escuadron(String nombre, String localidadbase, String lema, String lider, String tipoescuadron) {
+    public EscuadronHeroes(String nombre, String localidadbase, String lema, String lider) {
         this.nombre = nombre;
         this.localidadbase = localidadbase;
         this.lema = lema;
         this.lider = lider;
-        this.tipoescuadron = tipoescuadron;
     }
 
     public String getNombre() {
@@ -63,14 +62,6 @@ public class Escuadron {
         this.lider = lider;
     }
 
-    public String getTipoescuadron() {
-        return tipoescuadron;
-    }
-
-    public void setTipoescuadron(String tipoescuadron) {
-        this.tipoescuadron = tipoescuadron;
-    }
-
     public ArrayList<Superheroes> getHeroes() {
         return heroes;
     }
@@ -79,17 +70,18 @@ public class Escuadron {
         this.heroes = heroes;
     }
 
-    public ArrayList<Villanos> getVillanos() {
-        return villanos;
+    public boolean isTipo() {
+        return tipo;
     }
 
-    public void setVillanos(ArrayList<Villanos> villanos) {
-        this.villanos = villanos;
+    public void setTipo(boolean tipo) {
+        this.tipo = tipo;
     }
+    
 
     @Override
     public String toString() {
-        return "Escuadron{" + "nombre=" + nombre + ", localidadbase=" + localidadbase + ", lema=" + lema + ", lider=" + lider + ", tipoescuadron=" + tipoescuadron + ", heroes=" + heroes + ", villanos=" + villanos + '}';
+        return "Escuadron Heroes!    " + "Nombre: " + nombre + "  Localidad: " + localidadbase;
     }
     
 }

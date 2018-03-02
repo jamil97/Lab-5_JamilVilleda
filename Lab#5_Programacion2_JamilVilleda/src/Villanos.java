@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class Villanos {
 
     private String nombre;
-    private int poder;
-    private int debilidad;
-    private ArrayList<Escuadron> escuadronvillano = new ArrayList();
+    private String poder;
+    private String debilidad;
+    private ArrayList<EscuadronHeroes> escuadronvillano = new ArrayList();
     private int fuerza;
     private int agilidadfisica;
     private int agilidadmental;
@@ -24,7 +24,7 @@ public class Villanos {
     public Villanos() {
     }
 
-    public Villanos(String nombre, int poder, int debilidad, int fuerza, int agilidadfisica, int agilidadmental) {
+    public Villanos(String nombre, String poder, String debilidad, int fuerza, int agilidadfisica, int agilidadmental) {
         this.nombre = nombre;
         this.poder = poder;
         this.debilidad = debilidad;
@@ -41,27 +41,27 @@ public class Villanos {
         this.nombre = nombre;
     }
 
-    public int getPoder() {
+    public String getPoder() {
         return poder;
     }
 
-    public void setPoder(int poder) {
+    public void setPoder(String poder) {
         this.poder = poder;
     }
 
-    public int getDebilidad() {
+    public String getDebilidad() {
         return debilidad;
     }
 
-    public void setDebilidad(int debilidad) {
+    public void setDebilidad(String debilidad) {
         this.debilidad = debilidad;
     }
 
-    public ArrayList<Escuadron> getEscuadronvillano() {
+    public ArrayList<EscuadronHeroes> getEscuadronvillano() {
         return escuadronvillano;
     }
 
-    public void setEscuadronvillano(ArrayList<Escuadron> escuadronvillano) {
+    public void setEscuadronvillano(ArrayList<EscuadronHeroes> escuadronvillano) {
         this.escuadronvillano = escuadronvillano;
     }
 
@@ -91,7 +91,8 @@ public class Villanos {
 
     @Override
     public String toString() {
-        return "Villanos{" + "nombre=" + nombre + ", poder=" + poder + ", debilidad=" + debilidad + ", escuadronvillano=" + escuadronvillano + ", fuerza=" + fuerza + ", agilidadfisica=" + agilidadfisica + ", agilidadmental=" + agilidadmental + '}';
+        return "*Nombre Villano => " + nombre + ", Debilidad => " + debilidad;
     }
+
 
 }
