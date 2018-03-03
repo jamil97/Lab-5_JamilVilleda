@@ -11,12 +11,11 @@ import java.util.ArrayList;
  *
  * @author Jamil
  */
-public class Villanos {
+public class Villanos extends EscuadronVillanos {
 
     private String nombre;
     private String poder;
     private String debilidad;
-    private ArrayList<EscuadronHeroes> escuadronvillano = new ArrayList();
     private int fuerza;
     private int agilidadfisica;
     private int agilidadmental;
@@ -57,14 +56,6 @@ public class Villanos {
         this.debilidad = debilidad;
     }
 
-    public ArrayList<EscuadronHeroes> getEscuadronvillano() {
-        return escuadronvillano;
-    }
-
-    public void setEscuadronvillano(ArrayList<EscuadronHeroes> escuadronvillano) {
-        this.escuadronvillano = escuadronvillano;
-    }
-
     public int getFuerza() {
         return fuerza;
     }
@@ -93,6 +84,5 @@ public class Villanos {
     public String toString() {
         return "*Nombre Villano => " + nombre + ", Debilidad => " + debilidad;
     }
-
 
 }

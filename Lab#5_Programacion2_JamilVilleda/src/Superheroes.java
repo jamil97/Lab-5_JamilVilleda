@@ -10,12 +10,11 @@ import java.util.ArrayList;
  *
  * @author Jamil
  */
-public class Superheroes {
+public class Superheroes extends EscuadronHeroes {
 
     private String nombre;
     private String poder;
     private String debilidad;
-    private ArrayList<EscuadronHeroes> escuadronsuper = new ArrayList();
     private int fuerza;
     private int agilidadfisica;
     private int agilidadmental;
@@ -56,14 +55,6 @@ public class Superheroes {
         this.debilidad = debilidad;
     }
 
-    public ArrayList<EscuadronHeroes> getEscuadronsuper() {
-        return escuadronsuper;
-    }
-
-    public void setEscuadronsuper(ArrayList<EscuadronHeroes> escuadronsuper) {
-        this.escuadronsuper = escuadronsuper;
-    }
-
     public int getFuerza() {
         return fuerza;
     }
@@ -90,7 +81,7 @@ public class Superheroes {
 
     @Override
     public String toString() {
-        return "* Nombre superheroe => " + nombre + "" + ", Poder => " + poder ;
+        return "* Nombre superheroe => " + nombre + "" + ", Poder => " + poder;
     }
 
 }

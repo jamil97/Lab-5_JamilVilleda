@@ -12,30 +12,28 @@ import java.util.ArrayList;
  */
 public class EscuadronHeroes {
 
-    private String nombre;
+    private String nombreescuadron;
     private String localidadbase;
     private String lema;
     private String lider;
-    private ArrayList<Superheroes> heroes = new ArrayList();
     private boolean tipo = false;
-   
 
     public EscuadronHeroes() {
     }
 
-    public EscuadronHeroes(String nombre, String localidadbase, String lema, String lider) {
-        this.nombre = nombre;
+    public EscuadronHeroes(String nombreescuadron, String localidadbase, String lema, String lider) {
+        this.nombreescuadron = nombreescuadron;
         this.localidadbase = localidadbase;
         this.lema = lema;
         this.lider = lider;
     }
 
     public String getNombre() {
-        return nombre;
+        return nombreescuadron;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreescuadron = nombre;
     }
 
     public String getLocalidadbase() {
@@ -62,14 +60,6 @@ public class EscuadronHeroes {
         this.lider = lider;
     }
 
-    public ArrayList<Superheroes> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(ArrayList<Superheroes> heroes) {
-        this.heroes = heroes;
-    }
-
     public boolean isTipo() {
         return tipo;
     }
@@ -77,11 +67,10 @@ public class EscuadronHeroes {
     public void setTipo(boolean tipo) {
         this.tipo = tipo;
     }
-    
 
     @Override
     public String toString() {
-        return "Escuadron Heroes!    " + "Nombre: " + nombre + "  Localidad: " + localidadbase;
+        return "Escuadron Heroes!    " + "Nombre: " + nombreescuadron + "  Localidad: " + localidadbase;
     }
-    
+
 }

@@ -2,6 +2,8 @@
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -84,15 +86,17 @@ public class PowerSquad extends javax.swing.JFrame {
         bt_agregarescuadron = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_escuadron = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bt_eliminar = new javax.swing.JButton();
+        bt_modificar = new javax.swing.JButton();
         bg_heroes = new javax.swing.ButtonGroup();
         bg_villanos = new javax.swing.ButtonGroup();
         bg_escuadron = new javax.swing.ButtonGroup();
         jd_arbol = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jt_arbol = new javax.swing.JTree();
+        bt_agregararbol = new javax.swing.JButton();
+        jd_simulacion = new javax.swing.JDialog();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Escuadron = new javax.swing.JMenu();
@@ -120,6 +124,11 @@ public class PowerSquad extends javax.swing.JFrame {
         jb_superheroes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jb_superheroesMouseClicked(evt);
+            }
+        });
+        jb_superheroes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_superheroesActionPerformed(evt);
             }
         });
 
@@ -365,21 +374,26 @@ public class PowerSquad extends javax.swing.JFrame {
                 bt_agregarescuadronMouseClicked(evt);
             }
         });
+        bt_agregarescuadron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarescuadronActionPerformed(evt);
+            }
+        });
 
         jl_escuadron.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(jl_escuadron);
 
-        jButton1.setText("Elminar Escuadron");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_eliminar.setText("Elminar Escuadron");
+        bt_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                bt_eliminarMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Modificar Escuadron");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_modificar.setText("Modificar Escuadron");
+        bt_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                bt_modificarMouseClicked(evt);
             }
         });
 
@@ -388,50 +402,49 @@ public class PowerSquad extends javax.swing.JFrame {
         jd_escuadronLayout.setHorizontalGroup(
             jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_escuadronLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel23))
-                .addGap(27, 27, 27)
                 .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_escuadronLayout.createSequentialGroup()
-                        .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tf_liderescuadron, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(tf_lema, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_localidadbase, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_nombreescuadron, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addGroup(jd_escuadronLayout.createSequentialGroup()
-                            .addComponent(rb_superheroesescuadron)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rb_villanosescuadron)))))
-            .addGroup(jd_escuadronLayout.createSequentialGroup()
-                .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel23))
+                        .addGap(27, 27, 27)
+                        .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_escuadronLayout.createSequentialGroup()
+                                .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tf_liderescuadron, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(tf_lema, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_localidadbase, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nombreescuadron, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(43, 43, 43)
+                                .addComponent(jScrollPane2))
+                            .addGroup(jd_escuadronLayout.createSequentialGroup()
+                                .addComponent(rb_superheroesescuadron)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rb_villanosescuadron))))
                     .addGroup(jd_escuadronLayout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(jLabel17))
                     .addGroup(jd_escuadronLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(bt_agregarescuadron)
-                        .addGap(262, 262, 262)
-                        .addComponent(jButton2)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(bt_eliminar)
+                        .addGap(49, 49, 49)
+                        .addComponent(bt_modificar)))
+                .addGap(28, 28, 28))
         );
         jd_escuadronLayout.setVerticalGroup(
             jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_escuadronLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel17)
-                .addGap(27, 27, 27)
                 .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_escuadronLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_nombreescuadron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18))
@@ -446,9 +459,12 @@ public class PowerSquad extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_liderescuadron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                            .addComponent(jLabel21))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_escuadronLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -457,8 +473,8 @@ public class PowerSquad extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jd_escuadronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_agregarescuadron)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(bt_eliminar)
+                    .addComponent(bt_modificar))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -466,31 +482,54 @@ public class PowerSquad extends javax.swing.JFrame {
         jLabel5.setText("Arbol");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Power Squad");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane3.setViewportView(jTree1);
+        jt_arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(jt_arbol);
+
+        bt_agregararbol.setText("Agregar al arbol");
+        bt_agregararbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_agregararbolMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_arbolLayout = new javax.swing.GroupLayout(jd_arbol.getContentPane());
         jd_arbol.getContentPane().setLayout(jd_arbolLayout);
         jd_arbolLayout.setHorizontalGroup(
             jd_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_arbolLayout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addGroup(jd_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_arbolLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_arbolLayout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(261, 261, 261))))
+                        .addGap(261, 261, 261))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_arbolLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_arbolLayout.createSequentialGroup()
+                        .addComponent(bt_agregararbol)
+                        .addGap(202, 202, 202))))
         );
         jd_arbolLayout.setVerticalGroup(
             jd_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_arbolLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(18, 18, 18)
+                .addComponent(bt_agregararbol)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_simulacionLayout = new javax.swing.GroupLayout(jd_simulacion.getContentPane());
+        jd_simulacion.getContentPane().setLayout(jd_simulacionLayout);
+        jd_simulacionLayout.setHorizontalGroup(
+            jd_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        jd_simulacionLayout.setVerticalGroup(
+            jd_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -558,18 +597,13 @@ public class PowerSquad extends javax.swing.JFrame {
     private void bt_agregarescuadronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarescuadronMouseClicked
 
         if (this.rb_superheroesescuadron.isSelected()) {
-
             String nombre = this.tf_nombreescuadron.getText();
             String localidad = this.tf_localidadbase.getText();
             String lema = this.tf_lema.getText();
             String lider = this.tf_liderescuadron.getText();
-
             EscuadronHeroes eh = new EscuadronHeroes(nombre, localidad, lema, lider);
-
             DefaultListModel model = (DefaultListModel) this.jl_escuadron.getModel();
-
             model.addElement(eh);
-
             tf_nombrevillano.setText("");
             tf_podervillano.setText("");
             tf_debilidadvillano.setText("");
@@ -578,18 +612,13 @@ public class PowerSquad extends javax.swing.JFrame {
             sp_agilidadmentalvillanos.setValue(0);
 
         } else if (this.rb_villanosescuadron.isSelected()) {
-
             String nombre = this.tf_nombreescuadron.getText();
             String localidad = this.tf_localidadbase.getText();
             String lema = this.tf_lema.getText();
             String lider = this.tf_liderescuadron.getText();
-
             EscuadronVillanos ev = new EscuadronVillanos(nombre, localidad, lema, lider);
-
             DefaultListModel model = (DefaultListModel) this.jl_escuadron.getModel();
-
             model.addElement(ev);
-
             tf_nombrevillano.setText("");
             tf_podervillano.setText("");
             tf_debilidadvillano.setText("");
@@ -613,6 +642,8 @@ public class PowerSquad extends javax.swing.JFrame {
             Superheroes s = new Superheroes(nombre, poder, debilidad, fuerza, agilidadfisica, agilidadmental);
             DefaultListModel modelo = (DefaultListModel) jl_superheroes.getModel();
             modelo.addElement(s);
+            escuadronheroes.add(s);
+
             JOptionPane.showMessageDialog(this, "Se agrego exitosamente el superheroe ");
 
         } else {
@@ -653,6 +684,8 @@ public class PowerSquad extends javax.swing.JFrame {
             Villanos v = new Villanos(nombre, poder, debilidad, fuerza, agilidadfisica, agilidadmental);
             DefaultListModel modelo = (DefaultListModel) jl_villanos.getModel();
             modelo.addElement(v);
+            escuadronvillanos.add(v);
+
             JOptionPane.showMessageDialog(this, "Se agrego exitosamente el villano ");
 
         } else {
@@ -664,6 +697,7 @@ public class PowerSquad extends javax.swing.JFrame {
         sp_fuerzavillanos.setValue(0);
         sp_agilidadfisicavillanos.setValue(0);
         sp_agilidadmentalvillanos.setValue(0);
+
 
     }//GEN-LAST:event_bt_agregarMouseClicked
 
@@ -732,28 +766,58 @@ public class PowerSquad extends javax.swing.JFrame {
         v.setAgilidadmental(agilidadmental);
     }//GEN-LAST:event_bt_modificarvillanoMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-     
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void bt_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_eliminarMouseClicked
+        DefaultListModel modelo = (DefaultListModel) this.jl_escuadron.getModel();
+        if (jl_escuadron.getSelectedIndex() != -1) {
+            modelo.remove(jl_escuadron.getSelectedIndex());
+        }
+    }//GEN-LAST:event_bt_eliminarMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void bt_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_modificarMouseClicked
+       
+        
         DefaultListModel modelo = (DefaultListModel) this.jl_escuadron.getModel();
 
-        intjl_escuadron.getSelectedIndex();
-        String nombre = JOptionPane.showInputDialog("Ingrese un nuevo nombre: ");
-        String poder = JOptionPane.showInputDialog("Ingrese un nuevo poder: ");
-        String debilidad = JOptionPane.showInputDialog("Ingrese una nueva debilidad: ");
-        int fuerza = Integer.parseInt(JOptionPane.showInputDialog("Ingrese un nuevo valor de fuerza: "));
-        int agilidadfisica = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una nueva agilidad fisica: "));
-        int agilidadmental = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una nueva agilidad mental: "));
+        if (jl_escuadron.getSelectedValue() instanceof EscuadronHeroes) {
 
-        v.setNombre(nombre);
-        v.setPoder(poder);
-        v.setDebilidad(debilidad);
-        v.setFuerza(fuerza);
-        v.setAgilidadfisica(agilidadfisica);
-        v.setAgilidadmental(agilidadmental);
-    }//GEN-LAST:event_jButton2MouseClicked
+            EscuadronHeroes h = (EscuadronHeroes) modelo.getElementAt(jl_escuadron.getSelectedIndex());
+            String nombre = JOptionPane.showInputDialog("Ingrese un nuevo  de escuadron: ");
+            String localidad = JOptionPane.showInputDialog("Ingrese una nueva localidad: ");
+            String lema = JOptionPane.showInputDialog("Ingrese un nuevo lema: ");
+
+            h.setNombre(nombre);
+            h.setLocalidadbase(localidad);
+            h.setLema(lema);
+        }
+    }//GEN-LAST:event_bt_modificarMouseClicked
+
+    private void bt_agregarescuadronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarescuadronActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_agregarescuadronActionPerformed
+
+    private void bt_agregararbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregararbolMouseClicked
+
+        DefaultTreeModel m = (DefaultTreeModel) jt_arbol.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode nodo;
+        nodo = new DefaultMutableTreeNode(escuadronheroes.get(0).getNombre());
+        DefaultMutableTreeNode heroe;
+        heroe = new DefaultMutableTreeNode();
+        DefaultMutableTreeNode fuerza;
+        fuerza = new DefaultMutableTreeNode(new Superheroes().getFuerza());
+        heroe.add(fuerza);
+        nodo.add(heroe);
+        raiz.add(nodo);
+        m.reload();
+        
+        
+
+
+    }//GEN-LAST:event_bt_agregararbolMouseClicked
+
+    private void jb_superheroesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_superheroesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_superheroesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -800,13 +864,14 @@ public class PowerSquad extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bg_heroes;
     private javax.swing.ButtonGroup bg_villanos;
     private javax.swing.JButton bt_agregar;
+    private javax.swing.JButton bt_agregararbol;
     private javax.swing.JButton bt_agregarescuadron;
+    private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_eliminarheroe;
     private javax.swing.JButton bt_eliminarvillano;
+    private javax.swing.JButton bt_modificar;
     private javax.swing.JButton bt_modificarheroe;
     private javax.swing.JButton bt_modificarvillano;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -834,15 +899,16 @@ public class PowerSquad extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTree jTree1;
     private javax.swing.JButton jb_superheroes;
     private javax.swing.JDialog jd_arbol;
     private javax.swing.JDialog jd_escuadron;
+    private javax.swing.JDialog jd_simulacion;
     private javax.swing.JDialog jd_superheroes;
     private javax.swing.JDialog jd_villanos;
-    private javax.swing.JList<String> jl_escuadron;
+    private javax.swing.JList<Object> jl_escuadron;
     private javax.swing.JList<String> jl_superheroes;
     private javax.swing.JList<String> jl_villanos;
+    private javax.swing.JTree jt_arbol;
     private javax.swing.JRadioButton rb_superheroesescuadron;
     private javax.swing.JRadioButton rb_villanosescuadron;
     private javax.swing.JSpinner sp_agilidadfisicaheroes;
