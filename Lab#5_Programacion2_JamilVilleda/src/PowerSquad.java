@@ -97,6 +97,9 @@ public class PowerSquad extends javax.swing.JFrame {
         jt_arbol = new javax.swing.JTree();
         bt_agregararbol = new javax.swing.JButton();
         jd_simulacion = new javax.swing.JDialog();
+        popup_menu = new javax.swing.JPopupMenu();
+        jmi_hacerlider = new javax.swing.JMenuItem();
+        jmi_verdatos = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Escuadron = new javax.swing.JMenu();
@@ -483,6 +486,11 @@ public class PowerSquad extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Power Squad");
         jt_arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_arbolMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jt_arbol);
 
         bt_agregararbol.setText("Agregar al arbol");
@@ -531,6 +539,12 @@ public class PowerSquad extends javax.swing.JFrame {
             jd_simulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 384, Short.MAX_VALUE)
         );
+
+        jmi_hacerlider.setText("Hacer Lider");
+        popup_menu.add(jmi_hacerlider);
+
+        jmi_verdatos.setText("Ver Datos ");
+        popup_menu.add(jmi_verdatos);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -774,8 +788,7 @@ public class PowerSquad extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_eliminarMouseClicked
 
     private void bt_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_modificarMouseClicked
-       
-        
+
         DefaultListModel modelo = (DefaultListModel) this.jl_escuadron.getModel();
 
         if (jl_escuadron.getSelectedValue() instanceof EscuadronHeroes) {
@@ -800,17 +813,15 @@ public class PowerSquad extends javax.swing.JFrame {
         DefaultTreeModel m = (DefaultTreeModel) jt_arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
         DefaultMutableTreeNode nodo;
-        nodo = new DefaultMutableTreeNode(escuadronheroes.get(0).getNombre());
+        nodo = new DefaultMutableTreeNode(new EscuadronHeroes().getNombre());
         DefaultMutableTreeNode heroe;
-        heroe = new DefaultMutableTreeNode();
+        heroe = new DefaultMutableTreeNode(new Superheroes().getNombre());
         DefaultMutableTreeNode fuerza;
         fuerza = new DefaultMutableTreeNode(new Superheroes().getFuerza());
         heroe.add(fuerza);
         nodo.add(heroe);
         raiz.add(nodo);
         m.reload();
-        
-        
 
 
     }//GEN-LAST:event_bt_agregararbolMouseClicked
@@ -818,6 +829,12 @@ public class PowerSquad extends javax.swing.JFrame {
     private void jb_superheroesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_superheroesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_superheroesActionPerformed
+
+    private void jt_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_arbolMouseClicked
+        if (evt.isMetaDown()) {
+            popup_menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jt_arbolMouseClicked
 
     /**
      * @param args the command line arguments
@@ -908,7 +925,10 @@ public class PowerSquad extends javax.swing.JFrame {
     private javax.swing.JList<Object> jl_escuadron;
     private javax.swing.JList<String> jl_superheroes;
     private javax.swing.JList<String> jl_villanos;
+    private javax.swing.JMenuItem jmi_hacerlider;
+    private javax.swing.JMenuItem jmi_verdatos;
     private javax.swing.JTree jt_arbol;
+    private javax.swing.JPopupMenu popup_menu;
     private javax.swing.JRadioButton rb_superheroesescuadron;
     private javax.swing.JRadioButton rb_villanosescuadron;
     private javax.swing.JSpinner sp_agilidadfisicaheroes;
